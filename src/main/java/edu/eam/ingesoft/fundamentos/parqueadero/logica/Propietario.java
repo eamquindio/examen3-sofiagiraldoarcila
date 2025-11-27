@@ -23,6 +23,9 @@ public class Propietario {
      */
     public Propietario(String cedula, String nombre) {
         // TODO: Implementar constructor
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.horasAcumuladas = 0;   
     }
 
     // ==================== GETTERS ====================
@@ -56,6 +59,8 @@ public class Propietario {
      */
     public void acumularHoras(int horas) {
         // TODO: Implementar método
+        horasAcumuladas += horas;
+    
     }
 
     /**
@@ -67,7 +72,15 @@ public class Propietario {
      */
     public String obtenerCategoria() {
         // TODO: Implementar método usando if-else múltiple
+        if (horasAcumuladas <= 100) {
+            return "ESTANDAR";
+        } else if (horasAcumuladas >= 101 && horasAcumuladas <= 500) {
+            return "ESPECIAL";
+        } else if (horasAcumuladas > 500) {
+            return "VIP";
+        }else{
         return null;
+        }
     }
 
     /**
@@ -80,7 +93,17 @@ public class Propietario {
      */
     public double obtenerDescuento() {
         // TODO: Implementar método usando switch
-        return 0;
+        String categoria = obtenerCategoria();
+        switch (categoria) {
+            case "ESTANDAR":
+                return 0.0;
+            case "ESPECIAL":
+                return 0.10;
+            case "VIP":
+                return 0.15;
+            default:
+                return 0.0;
+        }
     }
 
     /**
@@ -89,6 +112,9 @@ public class Propietario {
      */
     public boolean esVIP() {
         // TODO: Implementar método usando if simple
+        if (horasAcumuladas > 500) {
+            return true;
+        }       
         return false;
     }
 }
